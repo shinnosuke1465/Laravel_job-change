@@ -33,6 +33,10 @@ class AgentController extends AdminController
         $grid->column('active', __('Active'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
+        $grid->column('agent_recruiter', 'Recruiters count')->display(function ($recruiters) {
+            $count = count($recruiters);
+            return "<span class='label label-warning'>{$count}</span>";
+        });
 
         return $grid;
     }

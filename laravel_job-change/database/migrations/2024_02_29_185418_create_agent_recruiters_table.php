@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agents', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('agent_recruiters', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('agent_id');
             $table->string('name');
-            $table->string('top_url');
-            $table->string('login_url');
-            $table->boolean('active');
+            $table->string('email');
+            $table->boolean('active')->default(true);
             $table->timestamps();
+            $table->foreign('agent_id')->references('id')->on('agents')->restrictOnDelete()->restrictOnUpdate();
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agents');
+        Schema::dropIfExists('agent_recruiters');
     }
 };
